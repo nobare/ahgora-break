@@ -1,0 +1,10 @@
+body{
+    background-size: cover;
+    height: 100%;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    padding: 30px;
+    font-size: calc(10px + 2vmin);
+    background-color: #282c34;
+    color: white;
+}
