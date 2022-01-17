@@ -1,9 +1,10 @@
-document.addEventListener('DOMContentLoaded', () => { document
+document.addEventListener('DOMContentLoaded', () => {
+    document
     .getElementById('offlineForm')
-    .addEventListener('submit', handleForm );
+    .addEventListener('submit', handleForm);
 });
 
-const handleForm = (event) => {
+const handleForm = async (event) => {
     event.preventDefault();
 
     let offlineForm = event.target;
@@ -17,22 +18,34 @@ const handleForm = (event) => {
 
     formData.append('time', document.getElementById('time').innerText);
     formData.append('agent', document.getElementById('agent').innerText);
+    formData.append('date', document.getElementById('date').innerText);
     formData.append('id', genId());
 
-    for (let key of formData.keys()) {
-        console.log(key, formData.get(key));
+    const formDataToJSON = (formData) => {
+        let obj = {};
+        for (let key of formData.keys()) {
+          obj[key] = formData.get(key);
+        }
+        return obj;
     }
 
-    let url = 'http://localhost:3000/';
-    let req = new Request(url, {
+    const data = await formDataToJSON(formData);
+
+    let header = new Headers();
+    header.append('Content-Type', 'application/json');
+    let req = new Request('http://localhost:8080/pause', {
+        headers: header,
         method: 'POST',
-        body: formData
+        body: JSON.stringify(data)
     })
 
     fetch(req)
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
+            setTimeout(() => {
+                window.close();
+            }, 500);
         })
         .catch(console.warn);
 }

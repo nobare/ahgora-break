@@ -14,23 +14,36 @@ const getCurrentTime = () => {
         time.minutes = '0' + time.minutes
     }
     // Format the click time as a string "hh:mm"
-    return time.hours + ':' + time.minutes
+    console.log(dateOBJ.getMonth())
+    return {
+        time: `${ time.hours }:${ time.minutes }`,
+        date: `${ dateOBJ.getDate() }/${ dateOBJ.getMonth() + 1 }/${ dateOBJ.getFullYear() }`
+    }
 }
-
-const timeElement = document.getElementById('time');
-const time = getCurrentTime();
-timeElement.innerText = time; 
-
-setInterval(() => {
-    const time = getCurrentTime();
-    timeElement.innerText = time;
-}, 1000);
 
 const updateAgent = () => {
     const agent = document.getElementById('agent');
     chrome.storage.sync.get(['Agente'], (data) => {
         return agent.innerText = data.Agente
-  });
+    });
 }
 
+const closeWindow = () => {
+    setTimeout(() => {
+        window.close();
+    }, 500);
+}
+
+const timeElement = document.getElementById('time');
+const dateElement = document.getElementById('date');
+const currentDay = getCurrentTime();
+timeElement.innerText = currentDay.time;
+dateElement.innerText = currentDay.date;
+
+setInterval(() => {
+    timeElement.innerText = currentDay.time;
+}, 1000);
+
+
+document.getElementById('expediente').addEventListener('click', closeWindow);
 document.addEventListener('DOMContentLoaded', updateAgent);
