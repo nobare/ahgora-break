@@ -7,38 +7,52 @@
   <link rel="stylesheet" href="offline.css">
 </head>
 <body>
-  <h1 id="time" name="time"></h1>
-  <h2 id="agent" name="agent"></h2>
-  <h2 id="date" name="date"></h2>
-  <form class="form" id="offlineForm">
-    <div class="flex justify-center">
-      <div class="mb-3 xl:w-96">
-        <select id="reason" name="reason" class="form-select form-select-lg mb-3
-          appearance-none
-          w-full
-          px-4
-          py-2
-          text-center
-          text-gray-700
-          bg-white bg-clip-padding bg-no-repeat
-          border border-solid border-gray-300
-          rounded
-          transition
-          ease-in-out
-          m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-lg">
-            <option value="banheiro">Banheiro</option>
-            <option value="lanche">Lanche</option>
-            <option value="cafe">Café</option>
-            <option value="reuniao">Reunião</option>
-            <option value="almoco">Almoço</option>
-            <option value="ginastica">Ginastica</option>
-        </select>
-        <button type="submit">Ficar Offline</button>
+  <div id="App">
+    <div class="App-header">
+    <h2 id="time" class="time" name="time"></h2>
+    <h2 id="agent" class="agent" name="agent"></h2>
+    <h2 id="date" class="date" name="date"></h2>
+    <form class="form" id="offlineForm">
+      <div class="flex justify-center">
+        <div class="mb-3 xl:w-96">
+          <select id="reason" name="reason" class="form-select form-select-lg mb-3
+            appearance-none
+            w-full
+            px-4
+            py-2
+            text-center
+            text-gray-700
+            bg-white bg-clip-padding bg-no-repeat
+            border border-solid border-gray-300
+            rounded
+            transition
+            ease-in-out
+            m-0
+            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-lg">
+              <option value="banheiro">Banheiro</option>
+              <option value="lanche">Lanche</option>
+              <option value="cafe">Café</option>
+              <option value="reuniao">Reunião</option>
+              <option value="almoco">Almoço</option>
+              <option value="ginastica">Ginastica</option>
+          </select>
+          <button type="submit" class="bg-white bg-clip-padding bg-no-repeat
+          hover:bg-blue-500 text-gray-700
+          hover:text-white 
+          py-2 px-4 
+          border border-blue-500 
+          hover:border-transparent rounded">Ficar Offline</button>
+        </div>
       </div>
+    </form>
+    <button  id="expediente" class="bg-white bg-clip-padding bg-no-repeat
+    hover:bg-blue-500 text-gray-700
+    hover:text-white 
+    py-2 px-4 
+    border border-blue-500 
+    hover:border-transparent rounded">Finalizando Expediente</button>
     </div>
-  </form>
-  <button id="expediente">Finalizando expediente</button>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
   <script src="/offline/offline.js"></script>
   <script src="/utils/utils.js"></script>
