@@ -3,14 +3,13 @@ document.addEventListener('DOMContentLoaded', () => { document
     .addEventListener('submit', handleForm );
 });
 
-const handleForm = async (event) => {
+const handleForm = (event) => {
     event.preventDefault();
 
     let offlineForm = event.target;
     let formData = new FormData(offlineForm);
 
     formData.append('time', document.getElementById('time').innerText);
-    formData.append('agent', document.getElementById('agent').innerText);
     formData.append('id', localStorage.getItem('pauseId'));
 
     const formDataToJSON = (formData) => {
@@ -21,23 +20,22 @@ const handleForm = async (event) => {
         return obj;
     }
 
-    const data = await formDataToJSON(formData);
+    const pause = formDataToJSON(formData);
 
-    let header = new Headers();
-    header.append('Content-Type', 'application/json');
-    let req = new Request(`http://localhost:8080/pause`, {
-        headers: header,
+    fetch(`http://localhost:8080/pause/${pause.id}`, {
         method: 'PATCH',
-        body: JSON.stringify(data)
+        body: JSON.stringify(pause),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
     })
-
-    fetch(req)
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            setTimeout(() => {
-                window.close();
-            }, 500);
-        })
-        .catch(console.warn);
+    .then((res) => res.json())
+    .then((data) => {
+        console.log(data);
+        setTimeout(() => {
+            window.close();
+        }, 500);
+    })
+    .catch(console.warn);
 }

@@ -14,7 +14,6 @@ const getCurrentTime = () => {
         time.minutes = '0' + time.minutes
     }
     // Format the click time as a string "hh:mm"
-    console.log(dateOBJ.getMonth())
     return {
         time: `${ time.hours }:${ time.minutes }`,
         date: `${ dateOBJ.getDate() }/${ dateOBJ.getMonth() + 1 }/${ dateOBJ.getFullYear() }`
@@ -31,7 +30,7 @@ const updateAgent = () => {
 const closeWindow = () => {
     setTimeout(() => {
         window.close();
-    }, 500);
+    }, 200);
 }
 
 const timeElement = document.getElementById('time');
@@ -41,9 +40,9 @@ timeElement.innerText = currentDay.time;
 dateElement.innerText = currentDay.date;
 
 setInterval(() => {
-    timeElement.innerText = currentDay.time;
+    let updatedTime = getCurrentTime();
+    timeElement.innerText = updatedTime.time;
 }, 1000);
-
 
 document.getElementById('expediente').addEventListener('click', closeWindow);
 document.addEventListener('DOMContentLoaded', updateAgent);

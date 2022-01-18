@@ -1,18 +1,17 @@
 {
   "description": "Controlador de intervalos dos Ahtivados",
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Ahgora-Absence",
   "version": "1.0",
   "permissions": [
     "webRequest",
     "storage",
     "tabs",
-    "scripting"
-  ],
-  "host_permissions": [
+    "activeTab",
     "<all_urls>"
   ],
   "background": {
-    "service_worker": "background.js"
-  }
+    "scripts": ["background.js"]
+  },
+  "content_security_policy": "script-src 'self' https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js; object-src 'self'"
 }
