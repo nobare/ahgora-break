@@ -22,7 +22,7 @@ const handleForm = (event) => {
 
     const pause = formDataToJSON(formData);
 
-    fetch(`http://localhost:8080/pause/${pause.id}`, {
+    fetch(`https://ahgora-api.herokuapp.com/pause/${pause.id}`, {
         method: 'PATCH',
         body: JSON.stringify(pause),
         headers: {
@@ -33,9 +33,7 @@ const handleForm = (event) => {
     .then((res) => res.json())
     .then((data) => {
         console.log(data);
-        setTimeout(() => {
-            window.close();
-        }, 500);
+        window.close();
     })
     .catch(console.warn);
 }

@@ -24,11 +24,11 @@ chrome.webRequest.onBeforeRequest.addListener(
   urls: ["https://seusucesso.ahgora.com.br/Chat/SetStatus/Online*"],
 });
 
-const getName = () => {
-  const name = document.querySelector(
-    '#hello-message-panel > div.col-sm-8.introduction-hello-name > div:nth-child(1) > div > strong > a').innerHTML
-  const editedName = name.slice(0, -1)
-  chrome.storage.sync.set({ 'Agente': editedName }, () => {
-    return console.log('Agente:' + editedName);
-  });
-}
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.status == 'complete' && tab.status == 'complete' && tab.url != undefined && tab.url.includes('https://seusucesso.ahgora.com.br/Home')) {
+      chrome.tabs.executeScript(tabId, { file: './utils/agent.js' }, () => {
+            chrome.tabs.sendMessage(tabId, 'getName')
+            console.log(tabId, tab.url);
+      });
+  };
+});
